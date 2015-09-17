@@ -7,6 +7,7 @@
  */
 
 use \Config;
+use OAuth\Common\Storage\TokenStorageInterface;
 use \URL;
 
 use \OAuth\ServiceFactory;
@@ -94,12 +95,12 @@ class OAuth {
      *
      * @param string $storageName
      *
-     * @return OAuth\Common\\Storage
+     * @return TokenStorageInterface
      */
     public function createStorageInstance($storageName)
     {
         $storageClass = "\\OAuth\\Common\\Storage\\$storageName";
-        $storage      = new $storageClass();
+        $storage = \App::make($storageClass);
 
         return $storage;
     }
